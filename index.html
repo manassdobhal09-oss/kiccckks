@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KICKS — Step into your style</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===== MANAS DOBHAL LUXURY INTRO SPLASH SCREEN ===== -->
+<div id="dimpleSplash" class="splash-screen" role="dialog" aria-modal="true" aria-label="Welcome introduction">
+  <div class="splash-bg">
+    <div class="splash-glow g1"></div>
+    <div class="splash-glow g2"></div>
+    <div class="splash-particles"></div>
+  </div>
+  <button id="skipSplash" class="splash-skip" aria-label="Skip introduction">Skip Intro <span>→</span></button>
+  <div class="splash-content">
+    <div class="splash-avatar-wrap">
+      <div class="splash-ring r1"></div>
+      <div class="splash-ring r2"></div>
+      <div class="splash-avatar">
+        <span class="splash-letter">M</span>
+      </div>
+      <span class="splash-badge">KICKS AI</span>
+    </div>
+    <div class="splash-text">
+      <span class="splash-greeting">Hey there, I am</span>
+      <h1 class="splash-title">Manas Dobhal</h1>
+      <p class="splash-sub">Welcome to KICKS — Curated Sneaker Studio</p>
+    </div>
+    <div class="splash-loader">
+      <div class="splash-bar"><div id="splashBarFill" class="splash-bar-fill"></div></div>
+      <div class="splash-status"><span id="splashStatus">Curating exclusive drops...</span> <b id="splashPercent">0%</b></div>
+    </div>
+  </div>
+</div>
+
+<div id="progress"></div>
+
+<header id="nav">
+  <a class="logo" href="#home" aria-label="KICKS home">
+    <svg width="26" height="26" viewBox="0 0 26 26"><rect width="26" height="26" rx="7" fill="#C6FF00"/><path d="M6 19 13 7l7 12h-4l-3-5-3 5z" fill="#0a0a0a"/></svg>KICKS
+  </a>
+  <nav id="links" aria-label="Main">
+    <a href="#home">Home</a>
+    <a href="#shop">Shop</a>
+    <a href="#collections">Collections</a>
+    <a href="#new" data-filter="new">New Arrivals</a>
+    <a href="#shop" data-filter="sale">Sale</a>
+    <a href="#" id="navQuizBtn">Size Quiz</a>
+  </nav>
+  <div class="tools">
+    <!-- Currency selector -->
+    <div class="cur-wrap" title="Change Currency">
+      <select id="curSelect" class="cur-select" aria-label="Select currency">
+        <option value="USD">USD ($)</option>
+        <option value="INR">INR (₹)</option>
+        <option value="EUR">EUR (€)</option>
+        <option value="GBP">GBP (£)</option>
+        <option value="AED">AED (د.إ)</option>
+        <option value="JPY">JPY (¥)</option>
+      </select>
+    </div>
+
+    <!-- VIP Scratch Card Trigger -->
+    <button class="ic vip-tool-btn" id="vipScratchBtn" aria-label="Unlock VIP Secret Voucher" title="VIP Scratch Card">
+      <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      <span class="vip-pulse-dot"></span>
+    </button>
+
+    <!-- Sound FX toggle -->
+    <button class="ic" id="soundBtn" aria-label="Toggle sound effects" title="UI Sound Effects">
+      <svg id="soundSvgOn" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+      <svg id="soundSvgOff" viewBox="0 0 24 24" style="display:none"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+    </button>
+
+    <!-- Replay Splash Intro -->
+    <button class="ic" id="replaySplashBtn" aria-label="Replay Manas Dobhal intro" title="Replay Manas Dobhal Intro">
+      <svg viewBox="0 0 24 24"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.19"/></svg>
+    </button>
+
+    <form id="searchBox" role="search"><input id="q" type="search" placeholder="Search sneakers or brands" aria-label="Search"></form>
+    <button class="ic" id="searchBtn" aria-label="Search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></button>
+    <button class="ic" id="themeBtn" aria-label="Toggle theme"><svg viewBox="0 0 24 24"><path d="M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10z"/></svg></button>
+    <button class="ic" id="wishBtn" aria-label="Wishlist"><svg viewBox="0 0 24 24"><path d="M12 21s-8-5-8-11a4.5 4.5 0 0 1 8-3 4.5 4.5 0 0 1 8 3c0 6-8 11-8 11z"/></svg><b class="badge" id="wishCount">0</b></button>
+    <button class="ic" id="cartBtn" aria-label="Bag"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6zM9 8a3 3 0 0 1 6 0"/></svg><b class="badge" id="cartCount">0</b></button>
+    <button class="ic" id="menuBtn" aria-label="Menu"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </div>
+</header>
+
+<main>
+<section id="home" class="hero">
+  <div class="grid-bg"></div><div class="circle c1"></div><div class="circle c2"></div>
+  <p class="vert">Season 26 / Street edit</p>
+  <div class="hero-text">
+    <h1><span class="line"><i>OWN YOUR</i></span><span class="line"><i>NEXT <em>STEP.</em></i></span></h1>
+    <p class="sub">Built for the streets. Designed for your everyday with Manas Dobhal AI guidance.</p>
+    <div class="cta">
+      <a class="btn primary" href="#shop">SHOP SNEAKERS</a>
+      <button class="btn ghost" id="heroQuizBtn">FIND MY FIT QUIZ</button>
+      <button class="btn ghost vip-highlight-btn" id="heroVipBtn">🎁 UNLOCK VIP VOUCHER</button>
+    </div>
+    <p class="tag">STEP INTO YOUR STYLE · HIGH-PERFORMANCE CURATION</p>
+  </div>
+  <div class="hero-img" id="heroImg">
+    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=900&q=80" alt="Red running sneaker" onerror="this.remove()">
+    <div class="float-label"><span>Air Pulse 270</span><b class="hero-price-val">$149</b></div>
+  </div>
+  <a class="scroll" href="#brands" aria-label="Scroll down"><span></span></a>
+</section>
+
+<section id="brands" class="strip" aria-label="Brands"><div class="marq"><span>NIKE · ADIDAS · NEW BALANCE · PUMA · ASICS · CONVERSE · </span><span aria-hidden="true">NIKE · ADIDAS · NEW BALANCE · PUMA · ASICS · CONVERSE · </span></div></section>
+
+<section class="perks" aria-label="Perks">
+  <div><b>Free global shipping</b><span id="perkFreeShip">on demo orders over $150</span></div>
+  <div><b>30-day trial returns</b><span>simulated exchange policy</span></div>
+  <div><b>Curated by Manas Dobhal</b><span>smart AI styling advisor</span></div>
+  <div><b>100% Authentic pairs</b><span>verified demo catalogue</span></div>
+</section>
+
+<section id="collections" class="sec reveal"><h2>Shop by category</h2><div class="cats" id="cats"></div></section>
+
+<section id="shop" class="sec reveal">
+  <div class="sec-head">
+    <div>
+      <h2>Trending sneakers</h2>
+      <p class="note">Curated premium catalogue with 360° views & side-by-side comparison.</p>
+    </div>
+    <div class="shop-quick-actions">
+      <button class="btn ghost" id="filterToggle" aria-expanded="false">Filters</button>
+    </div>
+  </div>
+  <div class="filters" id="filters">
+    <select id="fCat" aria-label="Category"></select><select id="fBrand" aria-label="Brand"></select>
+    <input id="fMin" type="number" min="0" placeholder="Min price" aria-label="Min price"><input id="fMax" type="number" min="0" placeholder="Max price" aria-label="Max price">
+    <select id="fSize" aria-label="Size"></select><select id="fColor" aria-label="Color"></select>
+    <select id="fSort" aria-label="Sort">
+      <option value="pop">Popularity</option>
+      <option value="new">Newest</option>
+      <option value="lo">Price: low to high</option>
+      <option value="hi">Price: high to low</option>
+    </select>
+    <button class="btn ghost" id="clearF">Clear all</button>
+  </div>
+  <p id="count" class="note" aria-live="polite"></p>
+  <div class="products" id="products"></div>
+  <div id="empty" class="empty" hidden><h3>No sneakers match.</h3><p>Try fewer filters or a different search.</p><button class="btn primary" id="emptyClear">Clear filters</button></div>
+</section>
+
+<section class="sec reveal" id="recentSec" hidden><h2>Recently viewed</h2><div class="products" id="recent"></div></section>
+
+<section class="limited sec reveal" id="limited">
+  <div><h2>RARE FINDS.<br>BIG ENERGY.</h2><p>Small runs, loud colours. Limited drop timer.</p>
+  <div class="timer" id="timer" aria-label="Demo countdown"></div><p class="note">Countdown resets on every visit.</p>
+  <button class="btn primary" data-cat="Limited Edition">EXPLORE THE DROP</button></div>
+  <img src="https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=900&q=80" alt="Limited edition sneaker" onerror="this.remove()">
+</section>
+
+<section class="campaign sec reveal">
+  <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=900&q=80" alt="Running sneaker" onerror="this.remove()">
+  <div><h2>MADE TO MOVE.</h2><p>Cushioning that keeps up from the morning commute to the late-night walk home.</p>
+  <ul class="feats"><li>Hyper-responsive Comfort</li><li>Engineered Breathability</li><li>Manas Dobhal Verified Fit</li></ul>
+  <button class="btn primary" data-cat="Running">BROWSE RUNNING</button></div>
+</section>
+
+<section class="sec reveal" id="reviews">
+  <div class="sec-head">
+    <div>
+      <h2>Customer reviews & fit check</h2>
+      <p class="note">★ 4.8 verified community score · 88% say "True to Size"</p>
+    </div>
+    <button class="btn ghost" id="openWriteReviewBtn">✍ Write a Review</button>
+  </div>
+  
+  <div class="fit-gauge-wrap">
+    <div class="fit-gauge-labels">
+      <span>Runs Small (12%)</span>
+      <b class="fit-highlight">True to Size (78%)</b>
+      <span>Runs Large (10%)</span>
+    </div>
+    <div class="fit-gauge-bar">
+      <div class="fg-small" style="width: 12%"></div>
+      <div class="fg-true" style="width: 78%"></div>
+      <div class="fg-large" style="width: 10%"></div>
+    </div>
+  </div>
+
+  <div class="revs" id="reviewsGrid">
+    <article><div class="stars">★★★★★</div><p>Air Pulse 270 feels like walking on air. Build quality is exceptional and shipping was instant!</p><span class="av">AK</span> Aarav K. on <b>Air Pulse 270</b> <span class="badge-ver">✓ Verified Buyer</span></article>
+    <article><div class="stars">★★★★☆</div><p>Retro Court 85 has that classic timeless aesthetic. Fits true to size, highly recommended.</p><span class="av">MS</span> Meera S. on <b>Retro Court 85</b> <span class="badge-ver">✓ Verified Buyer</span></article>
+    <article><div class="stars">★★★★★</div><p>Amazing grip on the Deck Pro Low. Manas Dobhal's AI styling picked the exact right size for my wide feet.</p><span class="av">RT</span> Rohan T. on <b>Deck Pro Low</b> <span class="badge-ver">✓ Verified Buyer</span></article>
+  </div>
+</section>
+
+<section class="sec reveal faq" id="faq"><h2>Questions, answered.</h2>
+<details><summary>Is this a real store?</summary><p>KICKS is a high-end luxury demo concept store created with vanilla modern web technologies. All orders, checkout, and inventory are simulated for demonstration.</p></details>
+<details><summary>Who is Manas Dobhal?</summary><p>Manas Dobhal is your interactive AI Sneaker Stylist and Host. Tap the bottom right Manas Dobhal avatar to chat, get custom recommendations by outfit or budget, and discover your perfect shoe size!</p></details>
+<details><summary>How do I find my size?</summary><p>Click "Size Quiz" in the navigation bar or "Size Guide" inside any product quick view to calculate your precise EU/UK fit.</p></details>
+<details><summary>Which discount codes work?</summary><p>Use <b>KICKS10</b> for 10% off, <b>WELCOME15</b> for 15% off first order, or scratch the VIP voucher card above for up to 25% off!</p></details>
+<details><summary>Where can I see my orders?</summary><p>Open "Order history" in the footer. Simulated orders progress from Placed → Packed → Shipped in real-time.</p></details>
+</section>
+
+<section class="news sec reveal">
+  <div><h2>GET THE GOOD STUFF.</h2><p class="note">Local demo — receive drop alerts & VIP releases.</p></div>
+  <form id="newsForm" novalidate><input id="newsEmail" type="email" placeholder="you@email.com" aria-label="Email"><button class="btn primary">SUBSCRIBE</button><p id="newsMsg" role="status"></p></form>
+</section>
+</main>
+
+<footer>
+  <div>
+    <a class="logo" href="#home">KICKS</a>
+    <p>STEP INTO YOUR STYLE — POWERED BY MANAS DOBHAL AI</p>
+    <div class="soc">
+      <a href="#" data-info="Instagram is a demo link: this project has no real social pages." aria-label="Instagram"><svg viewBox="0 0 24 24" width="20" height="20"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></svg></a>
+      <a href="#" data-info="X is a demo link: this project has no real social pages." aria-label="X"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 4l16 16M20 4 4 20"/></svg></a>
+      <a href="#" data-info="YouTube is a demo link: this project has no real social pages." aria-label="YouTube"><svg viewBox="0 0 24 24" width="20" height="20"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="m10 9 5 3-5 3z"/></svg></a>
+    </div>
+  </div>
+  <div><h4>Shop</h4><a href="#shop" data-filter="new">New arrivals</a><a href="#shop" data-filter="sale">Sale</a><a href="#collections">Categories</a><a href="#" id="footQuizLink">Fit Quiz</a></div>
+  <div><h4>Help</h4><a href="#" data-info="Simulated express worldwide shipping. Free over $150 threshold.">Shipping</a><a href="#" data-info="30-day demo hassle-free return guarantee.">Returns</a><a href="#" id="ordersLink">Order history</a><a href="#" id="footVipLink">VIP Pass</a></div>
+  <div><h4>About</h4><a href="#" data-info="KICKS is a high-performance luxury sneaker boutique experience with Manas Dobhal AI.">Our story</a><a href="#reviews">Reviews</a><a href="#" id="footReplaySplash">Replay Intro</a></div>
+  <p class="note full">© <span id="year"></span> KICKS Sneaker Studio · Host & Stylist: Manas Dobhal · Demo project: simulated inventory & checkout.</p>
+</footer>
+
+<!-- ===== FLOATING UI: ASK MANAS DOBHAL AI STYLIST LAUNCHER ===== -->
+<div id="dimpleLauncher" class="dimple-launcher" role="button" aria-label="Ask Manas Dobhal AI Sneaker Stylist" tabindex="0">
+  <div class="dimple-avatar-mini">
+    <span>M</span>
+    <span class="dimple-online"></span>
+  </div>
+  <div class="dimple-bubble-hint">
+    <b>Ask Manas</b>
+    <small>AI Sneaker Stylist 👋</small>
+  </div>
+</div>
+
+<!-- ===== ASK MANAS DOBHAL AI CHAT DRAWER ===== -->
+<aside id="dimpleChatDrawer" class="drawer dimple-chat-drawer" role="dialog" aria-modal="true" aria-label="Ask Manas Dobhal AI Sneaker Stylist">
+  <div class="dh dimple-dh">
+    <div class="dimple-dh-info">
+      <div class="dimple-avatar-mini small"><span>M</span><span class="dimple-online"></span></div>
+      <div>
+        <h4>Manas Dobhal AI Stylist</h4>
+        <p class="note">Your 24/7 personal sneaker advisor</p>
+      </div>
+    </div>
+    <button class="xclose" id="closeDimpleChat" aria-label="Close chat">✕</button>
+  </div>
+  <div class="dimple-chat-body" id="dimpleMessages"></div>
+  <div class="dimple-quick-chips" id="dimpleChips">
+    <button class="chip" data-q="recommend-under-120">Under $120 👟</button>
+    <button class="chip" data-q="recommend-running">Best for Running ⚡</button>
+    <button class="chip" data-q="recommend-trending">Trending Drip 🔥</button>
+    <button class="chip" data-q="recommend-limited">Rare Limited Drops 💎</button>
+    <button class="chip" data-q="find-fit">Find My Fit 📏</button>
+  </div>
+  <form id="dimpleInputForm" class="dimple-chat-input-row">
+    <input id="dimpleInputText" type="text" placeholder="Ask Manas: e.g. white shoes for gym..." autocomplete="off">
+    <button type="submit" class="btn primary dimple-send-btn" aria-label="Send query">
+      <svg width="18" height="18" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    </button>
+  </form>
+</aside>
+
+<!-- ===== FLOATING SNEAKER COMPARE DOCK ===== -->
+<div id="compareBar" class="compare-bar" hidden>
+  <div class="compare-bar-info">
+    <svg width="20" height="20" viewBox="0 0 24 24"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>
+    <span>Compare (<b id="compareCount">0</b>/3)</span>
+  </div>
+  <div class="compare-thumbs" id="compareThumbs"></div>
+  <div class="compare-actions">
+    <button class="btn primary" id="openCompareBtn">Compare Now</button>
+    <button class="btn ghost" id="clearCompareBtn">Clear</button>
+  </div>
+</div>
+
+<!-- ===== LIVE SOCIAL PROOF REAL-TIME TICKER ===== -->
+<div id="socialProofToast" class="social-proof-toast" hidden>
+  <div class="sp-icon">🔥</div>
+  <div class="sp-content">
+    <b id="spUser">Aarav from Mumbai</b>
+    <span id="spAction">just ordered Air Pulse 270</span>
+    <small id="spTime">2 mins ago</small>
+  </div>
+  <button id="closeSpToast" class="sp-close" aria-label="Dismiss">✕</button>
+</div>
+
+<!-- ===== DRAWERS & MODALS ===== -->
+<div id="backdrop"></div>
+<aside class="drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-label="Shopping bag"></aside>
+<aside class="drawer" id="wishDrawer" role="dialog" aria-modal="true" aria-label="Wishlist"></aside>
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Details"><div class="box" id="modalBox"></div></div>
+
+<!-- ===== SIZE FINDER QUIZ MODAL ===== -->
+<div class="modal" id="quizModal" role="dialog" aria-modal="true" aria-label="Size Finder Quiz">
+  <div class="box" id="quizModalBox"></div>
+</div>
+
+<!-- ===== SIDE-BY-SIDE COMPARE MODAL ===== -->
+<div class="modal" id="compareModal" role="dialog" aria-modal="true" aria-label="Sneaker Comparison">
+  <div class="box compare-box" id="compareModalBox"></div>
+</div>
+
+<!-- ===== GAMIFIED SCRATCH & WIN VIP CARD MODAL ===== -->
+<div class="modal" id="scratchModal" role="dialog" aria-modal="true" aria-label="Scratch and Win VIP Voucher">
+  <div class="box scratch-box" id="scratchModalBox">
+    <button class="xclose" id="closeScratchModal" aria-label="Close">✕</button>
+    <div class="scratch-header">
+      <span class="badge vip-pill">★ VIP MEMBER EXCLUSIVE</span>
+      <h2>Scratch & Unlock Secret VIP Discount</h2>
+      <p class="note">Rub / scratch the card below with your mouse or finger to uncover your secret discount voucher!</p>
+    </div>
+    <div class="scratch-card-container">
+      <div class="scratch-revealed-content">
+        <div class="vip-offer-wrap">
+          <span class="sparkle">✨</span>
+          <span class="vip-discount-tag">25% OFF</span>
+          <h3 class="vip-code-text">MANASVIP25</h3>
+          <p class="vip-code-desc">Valid on any pair · Auto-applied to bag!</p>
+          <button class="btn primary" id="applyScratchVoucherBtn">Apply Code to Bag</button>
+        </div>
+      </div>
+      <canvas id="scratchCanvas" width="340" height="200"></canvas>
+    </div>
+    <p class="scratch-status-note" id="scratchStatusNote">Scratch at least 50% to activate voucher</p>
+    <canvas id="confettiCanvas" class="confetti-canvas"></canvas>
+  </div>
+</div>
+
+<!-- ===== PRICE DROP & RESTOCK ALERT MODAL ===== -->
+<div class="modal" id="alertModal" role="dialog" aria-modal="true" aria-label="Price drop or restock alert">
+  <div class="box" id="alertModalBox"></div>
+</div>
+
+<!-- ===== WRITE A REVIEW MODAL ===== -->
+<div class="modal" id="reviewModal" role="dialog" aria-modal="true" aria-label="Write a sneaker review">
+  <div class="box" id="reviewModalBox"></div>
+</div>
+
+<button id="toTop" aria-label="Back to top">↑</button>
+<div id="toasts" aria-live="polite"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
